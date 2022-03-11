@@ -20,7 +20,7 @@ env = make_atari(env_id)
 env = wrap_deepmind(env)
 env = wrap_pytorch(env)
 
-num_frames = 600000
+num_frames = 200000
 batch_size = 32
 gamma = 0.99
 record_idx = 10000
@@ -87,5 +87,9 @@ for frame_idx in range(1, num_frames + 1):
         torch.save(model.state_dict(), 'name.pth')
 
 plt.plot(losses)
+plt.xlabel('losses')
+plt.show()
 plt.plot(all_rewards)
+plt.xlabel('rewards')
+plt.show()
 
