@@ -89,7 +89,9 @@ for frame_idx in range(1, num_frames + 1):
 plt.plot(losses)
 plt.xlabel('losses')
 plt.show()
+plt.savefig('losses.png')
 plt.plot(all_rewards)
 plt.xlabel('rewards')
 plt.show()
+plt.savefig('rewards.png')
 
