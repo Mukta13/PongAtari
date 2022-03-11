@@ -11,6 +11,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.autograd as autograd 
 import torch.nn.functional as F
+import pickle
 USE_CUDA = torch.cuda.is_available()
 from dqn import QLearner, compute_td_loss, ReplayBuffer
 
@@ -19,7 +20,7 @@ env = make_atari(env_id)
 env = wrap_deepmind(env)
 env = wrap_pytorch(env)
 
-num_frames = 2000000
+num_frames = 600000
 batch_size = 32
 gamma = 0.99
 record_idx = 10000
@@ -51,6 +52,7 @@ state = env.reset()
 
 for frame_idx in range(1, num_frames + 1):
     #print("Frame: " + str(frame_idx))
+
 
     epsilon = epsilon_by_frame(frame_idx)
     action = model.act(state, epsilon)
@@ -84,5 +86,6 @@ for frame_idx in range(1, num_frames + 1):
         target_model.copy_from(model)
         torch.save(model.state_dict(), 'name.pth')
 
-
+plt.plot(losses)
+plt.plot(all_rewards)
 
