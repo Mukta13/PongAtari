@@ -6,12 +6,12 @@ import numpy as np
 with (open("losses_file.pkl", "rb")) as openfile1:
     data1 = pickle.load(openfile1)
 frames, losses = zip(*data1)
-print(frames, losses)
+
 plt.scatter(frames, losses)
 plt.xlabel('# of frames')
 plt.ylabel('losses')
 plt.show()
-plt.savefig('losses.png')
+plt.savefig('losses1.png')
 
 with (open("all_rewards_file.pkl", "rb")) as openfile2:
     data2 = pickle.load(openfile2)
@@ -20,4 +20,4 @@ plt.scatter(frames, rewards)
 plt.xlabel('# of frames')
 plt.ylabel('rewards')
 plt.show()
-plt.savefig('rewards.png')
+plt.savefig('rewards1.png')
