@@ -20,7 +20,7 @@ env = make_atari(env_id)
 env = wrap_deepmind(env)
 env = wrap_pytorch(env)
 
-num_frames = 200000
+num_frames = 20000
 batch_size = 32
 gamma = 0.99
 record_idx = 10000
@@ -81,17 +81,18 @@ for frame_idx in range(1, num_frames + 1):
     if frame_idx % 10000 == 0 and len(replay_buffer) > replay_initial:
         print('#Frame: %d, Loss: %f' % (frame_idx, np.mean(losses, 0)[1]))
         print('Last-10 average reward: %f' % np.mean(all_rewards[-10:], 0)[1])
+        with open("losses_file.pkl", "wb") as losses_file:
+            pickle.dump(losses, losses_file)
+
+        with open("all_rewards_file.pkl", "wb") as all_rewards_file:
+            pickle.dump(all_rewards, all_rewards_file)
 
     if frame_idx % 50000 == 0:
         target_model.copy_from(model)
         torch.save(model.state_dict(), 'name.pth')
 
-plt.plot(losses)
-plt.xlabel('losses')
-plt.show()
-plt.savefig('losses.png')
-plt.plot(all_rewards)
-plt.xlabel('rewards')
-plt.show()
-plt.savefig('rewards.png')
+
+    with open("frames.pkl", "wb") as frames_file:
+        pickle.dump(frame_idx, frames_file)
+
 
