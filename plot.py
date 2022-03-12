@@ -2,18 +2,19 @@ import matplotlib.pyplot as plt
 import pickle
 import numpy as np
 
-#losses= pickle.load(open("losses_file.pkl", "rb"))
-with (open("losses_file.pkl", "rb")) as openfile:
-    data1 = pickle.load(openfile)
+
+with (open("losses_file.pkl", "rb")) as openfile1:
+    data1 = pickle.load(openfile1)
 frames, losses = zip(*data1)
+print(frames, losses)
 plt.scatter(frames, losses)
 plt.xlabel('# of frames')
 plt.ylabel('losses')
 plt.show()
 plt.savefig('losses.png')
-#rewards = zip(pickle.load(open("all_rewards_file.pkl", "rb")))
-with (open("all_rewards_file.pkl", "rb")) as openfile:
-    data2 = pickle.load(openfile)
+
+with (open("all_rewards_file.pkl", "rb")) as openfile2:
+    data2 = pickle.load(openfile2)
 frames, rewards = zip(*data2)
 plt.scatter(frames, rewards)
 plt.xlabel('# of frames')
