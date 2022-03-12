@@ -87,12 +87,20 @@ for frame_idx in range(1, num_frames + 1):
         with open("all_rewards_file.pkl", "wb") as all_rewards_file:
             pickle.dump(all_rewards, all_rewards_file)
 
+    #with open("frames.pkl", "wb") as frames_file:
+       # pickle.dump(frame_idx, frames_file)
+
     if frame_idx % 50000 == 0:
         target_model.copy_from(model)
         torch.save(model.state_dict(), 'name.pth')
 
+print (losses)
+print(num_frames-10001)
+plt.scatter(num_frames-10001, losses)
+plt.xlabel('# of frames')
+plt.ylabel('losses')
+plt.show()
+plt.savefig('losses1.png')
 
-    with open("frames.pkl", "wb") as frames_file:
-        pickle.dump(frame_idx, frames_file)
 
 
